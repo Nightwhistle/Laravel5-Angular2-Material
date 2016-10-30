@@ -1,0 +1,20 @@
+<ul class="tasks" style="display: block;">
+    <li *ngFor="let taskList of tasksList" class="task">
+        <div class="title">
+            <input type="checkbox"><h2>{{ taskList.id }}</h2> <a class="delete" (click)="deleteTask()">x</a>
+        </div>
+        <div class="text">
+            <p> {{ taskList.task }}</p>
+        </div>
+        <div class="footer">
+            <p> Created: {{ taskList.created_at }}</p>
+        </div>
+    </li>
+</ul>
+
+<div style="display:block">
+    <md-input placeholder="New Checklist" [(ngModel)]="newChecklist"></md-input>
+</div>
+
+
+<button md-raised-button color="primary" (click)="saveChecklist()">Save</button>

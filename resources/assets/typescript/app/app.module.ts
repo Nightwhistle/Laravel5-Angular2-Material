@@ -6,12 +6,15 @@ import { MdInputModule } from '@angular2-material/input';
 import 'rxjs/add/operator/map';
 
 import { AppComponent }  from './app.component';
+import {TasksComponent} from "./tasks.component";
+import {TasksService} from "./tasks.service";
+import {HttpModule} from "@angular/http";
 
 enableProdMode();
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, MdInputModule, MdButtonModule ],
-  declarations: [ AppComponent ],
+  imports:      [ BrowserModule, FormsModule, MdInputModule, MdButtonModule, HttpModule ],
+  declarations: [ AppComponent, TasksComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
