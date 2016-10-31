@@ -9,23 +9,17 @@ var TasksComponent = (function () {
         this.tasksList = tasksService.getTasks();
         console.log(this.tasksList);
     }
-    TasksComponent.prototype.saveChecklist = function () {
-        if (this.newChecklist) {
-            this.checklists.push(this.newChecklist);
-            this.newChecklist = '';
-        }
-    };
     TasksComponent.prototype.deleteTask = function (id) {
         console.log("Deleting task number " + id);
         this.tasksService.deleteTask(id);
     };
-    TasksComponent.prototype.updateTask = function (id, task) {
-        console.log("Updating task number " + id);
+    TasksComponent.prototype.updateTask = function (task) {
+        console.log("Updating task number " + task.id);
         console.log("sending: " + task);
-        this.tasksService.updateTask(id, task);
+        this.tasksService.updateTask(task);
     };
     TasksComponent.prototype.createTask = function (task) {
-        this.tasksList.push(this.tasksService.createTask(task));
+        this.tasksList.unshift(this.tasksService.createTask(task));
     };
     TasksComponent = __decorate([
         core_1.Component({

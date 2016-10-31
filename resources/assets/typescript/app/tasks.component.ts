@@ -24,26 +24,19 @@ export class TasksComponent {
         console.log(this.tasksList);
     }
 
-    saveChecklist(): void {
-        if (this.newChecklist) {
-            this.checklists.push(this.newChecklist);
-            this.newChecklist = '';
-        }
-    }
-
     deleteTask(id: number): void {
         console.log("Deleting task number " + id);
         this.tasksService.deleteTask(id);
 
     }
 
-    updateTask(id: number, task: string): void {
-        console.log("Updating task number " + id);
+    updateTask(task: Task) {
+        console.log("Updating task number " + task.id);
         console.log("sending: " + task);
-        this.tasksService.updateTask(id, task);
+        this.tasksService.updateTask(task);
     }
 
     createTask(task: string): void {
-        this.tasksList.push(this.tasksService.createTask(task));
+        this.tasksList.unshift(this.tasksService.createTask(task));
     }
 }

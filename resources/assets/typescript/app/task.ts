@@ -6,7 +6,7 @@ export class Task {
     id: number;
     task: string;
     priority: number;
-    done: number;
+    done: boolean = false;
     created_at: string;
     updated_at: string;
     editing: boolean = false;

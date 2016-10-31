@@ -12,7 +12,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return Task::all();
+        return Task::orderBy('created_at', 'desc')->get();
     }
 
     public function destroy($id)
@@ -22,11 +22,15 @@ class TaskController extends Controller
 
     public function update(Request $request, $id)
     {
-        $taskText = $request->json(0);
-        $task = Task::find($id);
-        $task->task = $taskText;
+        $req = json_decode($request->getContent());
+        $task = Task::find($req->id);
+        $task->task = $req->task;
+        $task->priority = $req->priority;
+
+        $done = ($req->done) ? 0 : 1;
+        $task->done = $done;
         $task->save();
-        return $taskText;
+        return $task;
     }
 
     public function store(Request $request) {

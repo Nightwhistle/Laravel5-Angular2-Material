@@ -36,10 +36,20 @@ export class TasksService {
             .subscribe(data => {});
     }
 
-    updateTask(id: number, task: string) {
+    updateTask(task: Task): Task {
+        var response: Task = new Task()
         console.log(task);
-        return this.http.put(this.updateTasksUrl + id, JSON.stringify(task), this.headers)
-            .subscribe(a => {});
+        this.http.put(this.updateTasksUrl + task.id, JSON.stringify(task), this.headers)
+            .map(a => a.json())
+            .subscribe(data => {
+                response.id = data.id;
+                response.task = data.task;
+                response.priority = data.priority;
+                response.done = (data.done === 0) ? false : true;
+                response.created_at = data.created_at;
+                response.updated_at = data.updated_at;
+            });
+        return response;
     }
 
     createTask(task: string): Task {
@@ -50,7 +60,7 @@ export class TasksService {
                 response.id = data.id;
                 response.task = data.task;
                 response.priority = data.priority;
-                response.done = data.done;
+                response.done = (data.done === 0) ? false : true;
                 response.created_at = data.created_at;
                 response.updated_at = data.updated_at;
             });
