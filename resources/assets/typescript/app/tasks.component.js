@@ -15,6 +15,18 @@ var TasksComponent = (function () {
             this.newChecklist = '';
         }
     };
+    TasksComponent.prototype.deleteTask = function (id) {
+        console.log("Deleting task number " + id);
+        this.tasksService.deleteTask(id);
+    };
+    TasksComponent.prototype.updateTask = function (id, task) {
+        console.log("Updating task number " + id);
+        console.log("sending: " + task);
+        this.tasksService.updateTask(id, task);
+    };
+    TasksComponent.prototype.createTask = function (task) {
+        this.tasksList.push(this.tasksService.createTask(task));
+    };
     TasksComponent = __decorate([
         core_1.Component({
             selector: 'tasks',

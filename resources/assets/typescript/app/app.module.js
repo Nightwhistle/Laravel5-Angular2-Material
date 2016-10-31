@@ -1,11 +1,11 @@
 "use strict";
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var forms_1 = require('@angular/forms');
-var button_1 = require('@angular2-material/button');
-var input_1 = require('@angular2-material/input');
-require('rxjs/add/operator/map');
-var app_component_1 = require('./app.component');
+var core_1 = require("@angular/core");
+var platform_browser_1 = require("@angular/platform-browser");
+var forms_1 = require("@angular/forms");
+var button_1 = require("@angular2-material/button");
+var input_1 = require("@angular2-material/input");
+require("rxjs/add/operator/map");
+var app_component_1 = require("./app.component");
 var tasks_component_1 = require("./tasks.component");
 var http_1 = require("@angular/http");
 core_1.enableProdMode();

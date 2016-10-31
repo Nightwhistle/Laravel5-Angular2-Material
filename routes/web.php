@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tasks', 'TaskController@index');
+Route::resource('api/tasks', 'TaskController');
+
+Route::post('/api/tasks/create/new', 'TaskController@createNew');

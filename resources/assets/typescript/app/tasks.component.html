@@ -1,20 +1,24 @@
+<div>
+    <h2>Add new task</h2>
+    <input type="text" #newTaskText>
+    <button (click)="createTask(newTaskText.value)">Add task</button>
+</div>
+
 <ul class="tasks" style="display: block;">
-    <li *ngFor="let taskList of tasksList" class="task">
+    <li *ngFor="let t of tasksList" class="task">
         <div class="title">
-            <input type="checkbox"><h2>{{ taskList.id }}</h2> <a class="delete" (click)="deleteTask()">x</a>
+            <input type="checkbox"><h2>{{ t.id }}</h2> <a class="delete" (click)="deleteTask(t.id);tasksList.splice(tasksList.indexOf(t),1);">x</a>
         </div>
         <div class="text">
-            <p> {{ taskList.task }}</p>
+            <p> {{ t.task }}</p>
+            <button (click)="t.editing=true" class="edit-button">Edit</button>
+            <div *ngIf="t.editing">
+                <input name="task" [(ngModel)]="t.task">
+                <button (click)="updateTask(t.id, t.task); t.editing = false">Update</button>
+            </div>
         </div>
         <div class="footer">
-            <p> Created: {{ taskList.created_at }}</p>
+            <p> Created: {{ t.created_at }} // Updated: {{ t.updated_at}}</p>
         </div>
     </li>
 </ul>
-
-<div style="display:block">
-    <md-input placeholder="New Checklist" [(ngModel)]="newChecklist"></md-input>
-</div>
-
-
-<button md-raised-button color="primary" (click)="saveChecklist()">Save</button>

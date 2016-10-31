@@ -17,8 +17,6 @@ export class TasksComponent {
     public newChecklist: string = '';
     public checklists: string[] = [];
 
-
-
     public tasksList: Task[];
 
     constructor(private tasksService: TasksService) {
@@ -31,5 +29,21 @@ export class TasksComponent {
             this.checklists.push(this.newChecklist);
             this.newChecklist = '';
         }
+    }
+
+    deleteTask(id: number): void {
+        console.log("Deleting task number " + id);
+        this.tasksService.deleteTask(id);
+
+    }
+
+    updateTask(id: number, task: string): void {
+        console.log("Updating task number " + id);
+        console.log("sending: " + task);
+        this.tasksService.updateTask(id, task);
+    }
+
+    createTask(task: string): void {
+        this.tasksList.push(this.tasksService.createTask(task));
     }
 }

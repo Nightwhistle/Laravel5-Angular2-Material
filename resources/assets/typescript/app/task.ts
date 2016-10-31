@@ -4,9 +4,10 @@
 
 export class Task {
     id: number;
-    text: string;
+    task: string;
     priority: number;
     done: number;
     created_at: string;
     updated_at: string;
+    editing: boolean = false;
 }
