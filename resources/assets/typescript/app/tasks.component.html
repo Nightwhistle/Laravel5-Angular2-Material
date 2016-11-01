@@ -6,7 +6,7 @@
     </div>
 
     <ul class="list-unstyled">
-        <li class="panel panel-default" *ngFor="let t of tasksList">
+        <li class="panel panel-default" *ngFor="let t of tasksList | paginate: { itemsPerPage: 3, currentPage: p }">
             <div class="panel-heading">
                 <div class="row">
                     <input class="col-md-1" type="checkbox" [(ngModel)]="t.done" (ngModelChange)="updateTask(t)">
@@ -39,3 +39,5 @@
             </div>
         </li>
     </ul>
+    
+    <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>

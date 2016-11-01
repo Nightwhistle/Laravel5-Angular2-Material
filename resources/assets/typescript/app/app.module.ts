@@ -7,11 +7,12 @@ import "rxjs/add/operator/map";
 import {AppComponent} from "./app.component";
 import {TasksComponent} from "./tasks.component";
 import {HttpModule} from "@angular/http";
+import {Ng2PaginationModule} from 'ng2-pagination';
 
 enableProdMode();
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, MdInputModule, MdButtonModule, HttpModule ],
+  imports:      [ BrowserModule, FormsModule, MdInputModule, MdButtonModule, HttpModule, Ng2PaginationModule ],
   declarations: [ AppComponent, TasksComponent ],
   bootstrap:    [ AppComponent ]
 })
