@@ -1,12 +1,11 @@
 // Imports
-import {Injectable}     from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Task} from './task';
+import {Injectable} from "@angular/core";
+import {Http, Response, Headers} from "@angular/http";
+import {Task} from "./task";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import "rxjs/Rx";
 // Import RxJs required methods
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
-import {Observable} from "rxjs";
 
 
 @Injectable()
@@ -30,22 +29,21 @@ export class TasksService {
         return this.tasks;
     }
 
-    deleteTask(id: number) {
+    deleteTask(t: Task) {
         var response: Task = new Task();
-        this.http.delete(this.deleteTaskUrl + id)
+        this.http.delete(this.deleteTaskUrl + t.id)
             .subscribe(data => {});
     }
 
     updateTask(task: Task): Task {
-        var response: Task = new Task()
-        console.log(task);
+        var response: Task = new Task();
         this.http.put(this.updateTasksUrl + task.id, JSON.stringify(task), this.headers)
             .map(a => a.json())
             .subscribe(data => {
                 response.id = data.id;
                 response.task = data.task;
                 response.priority = data.priority;
-                response.done = (data.done === 0) ? false : true;
+                response.done = data.done;
                 response.created_at = data.created_at;
                 response.updated_at = data.updated_at;
             });
@@ -60,7 +58,7 @@ export class TasksService {
                 response.id = data.id;
                 response.task = data.task;
                 response.priority = data.priority;
-                response.done = (data.done === 0) ? false : true;
+                response.done = data.done;
                 response.created_at = data.created_at;
                 response.updated_at = data.updated_at;
             });

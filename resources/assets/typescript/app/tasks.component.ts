@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 import {TasksService} from "./tasks.service";
 import {Task} from "./task";
-import {module} from "@angular/upgrade/src/angular_js";
 /**
  * Created by vivify on 10/28/16.
  */
@@ -21,18 +20,15 @@ export class TasksComponent {
 
     constructor(private tasksService: TasksService) {
         this.tasksList = tasksService.getTasks();
-        console.log(this.tasksList);
     }
 
-    deleteTask(id: number): void {
-        console.log("Deleting task number " + id);
-        this.tasksService.deleteTask(id);
+    deleteTask(t: Task): void {
+        this.tasksService.deleteTask(t);
+        this.tasksList.splice(this.tasksList.indexOf(t),1);
 
     }
 
-    updateTask(task: Task) {
-        console.log("Updating task number " + task.id);
-        console.log("sending: " + task);
+    updateTask(task: Task, event: Event) {
         this.tasksService.updateTask(task);
     }
 

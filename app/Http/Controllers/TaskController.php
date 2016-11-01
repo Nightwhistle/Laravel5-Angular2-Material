@@ -1,12 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Task;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class TaskController extends Controller
 {
@@ -26,9 +22,7 @@ class TaskController extends Controller
         $task = Task::find($req->id);
         $task->task = $req->task;
         $task->priority = $req->priority;
-
-        $done = ($req->done) ? 0 : 1;
-        $task->done = $done;
+        $task->done = $req->done;
         $task->save();
         return $task;
     }
@@ -45,7 +39,7 @@ class TaskController extends Controller
         $task = new Task();
         $task->task = $taskText;
         $task->priority = 10;
-        $task->done = 0;
+        $task->done = false;
         $task->save();
         return $task;
     }

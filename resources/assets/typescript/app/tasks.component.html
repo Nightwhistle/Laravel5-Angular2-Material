@@ -7,8 +7,8 @@
 <ul class="tasks" style="display: block;">
     <li *ngFor="let t of tasksList" class="task {{t.done}}">
         <div class="title">
-            <input type="checkbox" [(ngModel)]="t.done" (change)="updateTask(t)" >
-            <select name="priority" [(ngModel)]="t.priority" (change)="updateTask(t)">
+            <input type="checkbox" [(ngModel)]="t.done" (ngModelChange)="updateTask(t)" >
+            <select name="priority" [(ngModel)]="t.priority" (ngModelChange)="updateTask(t)">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -20,7 +20,7 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-            <h2>{{ t.id }}</h2> <a class="delete" (click)="deleteTask(t.id);tasksList.splice(tasksList.indexOf(t),1);">x</a>
+            <h2>{{ t.id }}</h2> <a class="delete" (click)="deleteTask(t)">x</a>
            // done: {{t.done}}  priority: {{t.priority}} //
         </div>
         <div class="text">

@@ -1,10 +1,10 @@
 "use strict";
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var task_1 = require('./task');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/catch');
-require('rxjs/Rx');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var task_1 = require("./task");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/Rx");
 var TasksService = (function () {
     function TasksService(http) {
         this.http = http;
@@ -22,21 +22,20 @@ var TasksService = (function () {
             .subscribe(function (data) { return data.forEach(function (child) { return _this.tasks.push(child); }); });
         return this.tasks;
     };
-    TasksService.prototype.deleteTask = function (id) {
+    TasksService.prototype.deleteTask = function (t) {
         var response = new task_1.Task();
-        this.http.delete(this.deleteTaskUrl + id)
+        this.http.delete(this.deleteTaskUrl + t.id)
             .subscribe(function (data) { });
     };
     TasksService.prototype.updateTask = function (task) {
         var response = new task_1.Task();
-        console.log(task);
         this.http.put(this.updateTasksUrl + task.id, JSON.stringify(task), this.headers)
             .map(function (a) { return a.json(); })
             .subscribe(function (data) {
             response.id = data.id;
             response.task = data.task;
             response.priority = data.priority;
-            response.done = (data.done === 0) ? false : true;
+            response.done = data.done;
             response.created_at = data.created_at;
             response.updated_at = data.updated_at;
         });
@@ -50,7 +49,7 @@ var TasksService = (function () {
             response.id = data.id;
             response.task = data.task;
             response.priority = data.priority;
-            response.done = (data.done === 0) ? false : true;
+            response.done = data.done;
             response.created_at = data.created_at;
             response.updated_at = data.updated_at;
         });
