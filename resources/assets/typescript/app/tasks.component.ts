@@ -19,12 +19,12 @@ export class TasksComponent {
 
     constructor(private tasksService: TasksService) {
         this.tasksList = tasksService.getTasks();
+        console.log(this.tasksList);
     }
 
     deleteTask(t: Task): void {
         this.tasksService.deleteTask(t);
         this.tasksList.splice(this.tasksList.indexOf(t),1);
-
     }
 
     updateTask(task: Task, event: Event) {

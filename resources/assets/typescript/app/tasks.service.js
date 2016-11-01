@@ -20,8 +20,9 @@ var TasksService = (function () {
         this.http.get(this.getTasksUrl)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            data.data.forEach(function (child) { return _this.tasks.push(child); });
+            data.forEach(function (child) { return _this.tasks.push(child); });
         });
+        console.log(this.tasks);
         return this.tasks;
     };
     TasksService.prototype.deleteTask = function (t) {

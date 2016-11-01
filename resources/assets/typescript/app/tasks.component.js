@@ -7,6 +7,7 @@ var TasksComponent = (function () {
         this.newChecklist = '';
         this.checklists = [];
         this.tasksList = tasksService.getTasks();
+        console.log(this.tasksList);
     }
     TasksComponent.prototype.deleteTask = function (t) {
         this.tasksService.deleteTask(t);

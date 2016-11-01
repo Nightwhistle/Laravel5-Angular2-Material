@@ -26,8 +26,9 @@ export class TasksService {
         this.http.get(this.getTasksUrl)
             .map((res: Response) => res.json())
             .subscribe(data => {
-                data.data.forEach(child => this.tasks.push(child));
+                data.forEach(child => this.tasks.push(child));
             });
+        console.log(this.tasks);
         return this.tasks;
     }
 

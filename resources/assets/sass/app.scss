@@ -1,55 +1,17 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-ul {
-  font-family: "Arial";
-  list-style: none;
+.close {
+  visibility: hidden;
 }
 
-.tasks .title {
-  background: yellow;
-  padding: 0 5px 0;
+.btn-edit {
+  visibility: hidden;
 }
 
-.tasks .footer {
-  font-size: 10px;
-  color: gray;
-  text-align: right;
-  padding-bottom: 2px;
+.panel:hover .close {
+  visibility: visible;
 }
 
-.tasks .task {
-  margin: 2px;
-  padding: 2px;
-  border: 1px solid gray;
-}
-
-.tasks .delete {
-  padding: auto;
-  text-align: center;
-  padding-top: 5px;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  float: right;
-}
-
-.tasks .delete:hover {
-  background: orange;
-}
-
-.tasks h2 {
-  display: inline-block;
-  margin:  0; padding: 0;
-}
-
-.tasks p {
-  margin: 0; padding: 10px;
-}
-
-button {
-  display: block;
-}
-
-.tasks .true {
-  background: gray;
+.panel:hover .btn-edit {
+  visibility: visible;
 }

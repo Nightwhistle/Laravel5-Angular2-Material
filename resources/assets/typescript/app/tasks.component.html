@@ -1,38 +1,41 @@
-<div>
-    <h2>Add new task</h2>
-    <input type="text" #newTaskText>
-    <button (click)="createTask(newTaskText.value)">Add task</button>
-</div>
 
-<ul class="tasks" style="display: block;">
-    <li *ngFor="let t of tasksList" class="task {{t.done}}">
-        <div class="title">
-            <input type="checkbox" [(ngModel)]="t.done" (ngModelChange)="updateTask(t)" >
-            <select name="priority" [(ngModel)]="t.priority" (ngModelChange)="updateTask(t)">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-            <h2>{{ t.id }}</h2> <a class="delete" (click)="deleteTask(t)">x</a>
-           // done: {{t.done}}  priority: {{t.priority}} //
-        </div>
-        <div class="text">
-            <p> {{ t.task }}</p>
-            <button (click)="t.editing=true" class="edit-button">Edit</button>
-            <div *ngIf="t.editing">
-                <input name="task" [(ngModel)]="t.task">
-                <button (click)="updateTask(t); t.editing = false">Update</button>
+    <div class="panel">
+        <h2>Add new task</h2>
+        <input type="text" #newTaskText>
+        <button (click)="createTask(newTaskText.value)">Add task</button>
+    </div>
+
+    <ul class="list-unstyled">
+        <li class="panel panel-default" *ngFor="let t of tasksList">
+            <div class="panel-heading">
+                <div class="row">
+                    <input class="col-md-1" type="checkbox" [(ngModel)]="t.done" (ngModelChange)="updateTask(t)">
+                    <select class="col-md-1" name="priority" [(ngModel)]="t.priority" (ngModelChange)="updateTask(t)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <span class="col-md-9 strong text-primary">{{ t.id }}</span>
+                    <button class="col-md-1 close" (click)="deleteTask(t)">&times;</button>
+                </div>
             </div>
-        </div>
-        <div class="footer">
-            <p> Created: {{ t.created_at }} // Updated: {{ t.updated_at}}</p>
-        </div>
-    </li>
-</ul>
+            <div class="panel-body">
+                <p> {{ t.task }}</p>
+                <button class="btn btn-default btn-edit" (click)="t.editing=true">Edit</button>
+                <div *ngIf="t.editing">
+                    <input name="task" [(ngModel)]="t.task">
+                    <button (click)="updateTask(t); t.editing = false">Update</button>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p>{{ t.created_at | date}}</p>
+            </div>
+        </li>
+    </ul>
