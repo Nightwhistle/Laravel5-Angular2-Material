@@ -25,7 +25,9 @@ export class TasksService {
     getTasks(): Task[] {
         this.http.get(this.getTasksUrl)
             .map((res: Response) => res.json())
-            .subscribe(data => data.forEach(child => this.tasks.push(child)));
+            .subscribe(data => {
+                data.data.forEach(child => this.tasks.push(child));
+            });
         return this.tasks;
     }
 
@@ -37,7 +39,7 @@ export class TasksService {
 
     updateTask(task: Task): Task {
         var response: Task = new Task();
-        this.http.put(this.updateTasksUrl + task.id, JSON.stringify(task), this.headers)
+        this.http.put(this.updateTasksUrl + task.id, task, this.headers)
             .map(a => a.json())
             .subscribe(data => {
                 response.id = data.id;

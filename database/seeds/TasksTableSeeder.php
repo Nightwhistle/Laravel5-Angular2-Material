@@ -11,13 +11,13 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 10; $i++) {
+        $faker = Faker\Factory::create();
 
-            DB::table('tasks')->insert([
-                'task' => str_random(100),
-                'priority' => random_int(1, 10),
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
+        for ($i = 0; $i < 50; $i++) {
+            \App\User::create([
+                'task' => $faker->sentences(5),
+                'priority' => $faker->numberBetween(0,10),
+                'done' => $faker->numberBetween(0,1)
             ]);
         }
     }

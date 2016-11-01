@@ -8,7 +8,6 @@ import {Task} from "./task";
 @Component({
     selector: 'tasks',
     template: require('./tasks.component.html'),
-    // styleUrls: ['./tasks.component.css'],
     providers: [TasksService]
 })
 

@@ -16,13 +16,13 @@ class TaskController extends Controller
         return Task::destroy($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $req = json_decode($request->getContent());
-        $task = Task::find($req->id);
-        $task->task = $req->task;
-        $task->priority = $req->priority;
-        $task->done = $req->done;
+        $req = $request->all();
+        $task = Task::find($req['id']);
+        $task->task = $req['task'];
+        $task->priority = $req['priority'];
+        $task->done = $req['done'];
         $task->save();
         return $task;
     }

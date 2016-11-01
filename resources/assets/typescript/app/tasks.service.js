@@ -19,7 +19,9 @@ var TasksService = (function () {
         var _this = this;
         this.http.get(this.getTasksUrl)
             .map(function (res) { return res.json(); })
-            .subscribe(function (data) { return data.forEach(function (child) { return _this.tasks.push(child); }); });
+            .subscribe(function (data) {
+            data.data.forEach(function (child) { return _this.tasks.push(child); });
+        });
         return this.tasks;
     };
     TasksService.prototype.deleteTask = function (t) {
@@ -29,7 +31,7 @@ var TasksService = (function () {
     };
     TasksService.prototype.updateTask = function (task) {
         var response = new task_1.Task();
-        this.http.put(this.updateTasksUrl + task.id, JSON.stringify(task), this.headers)
+        this.http.put(this.updateTasksUrl + task.id, task, this.headers)
             .map(function (a) { return a.json(); })
             .subscribe(function (data) {
             response.id = data.id;
