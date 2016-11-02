@@ -10,4 +10,6 @@ export class Task {
     created_at: string;
     updated_at: string;
     editing: boolean = false;
+    errors: {};
+    hasError: number = 0;
 }

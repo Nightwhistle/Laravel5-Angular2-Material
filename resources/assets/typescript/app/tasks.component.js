@@ -1,13 +1,13 @@
 "use strict";
 var core_1 = require("@angular/core");
 var tasks_service_1 = require("./tasks.service");
+var task_1 = require("./task");
 var TasksComponent = (function () {
     function TasksComponent(tasksService) {
         this.tasksService = tasksService;
         this.newChecklist = '';
         this.checklists = [];
         this.tasksList = tasksService.getTasks();
-        console.log(this.tasksList);
     }
     TasksComponent.prototype.deleteTask = function (t) {
         this.tasksService.deleteTask(t);
@@ -16,8 +16,13 @@ var TasksComponent = (function () {
     TasksComponent.prototype.updateTask = function (task, event) {
         this.tasksService.updateTask(task);
     };
-    TasksComponent.prototype.createTask = function (task) {
-        this.tasksList.unshift(this.tasksService.createTask(task));
+    TasksComponent.prototype.createTask = function (createTaskString) {
+        var task = new task_1.Task();
+        task.task = createTaskString;
+        var response;
+        response = this.tasksService.createTask(task);
+        console.log(JSON.stringify(response));
+        this.tasksList.unshift(response);
     };
     TasksComponent = __decorate([
         core_1.Component({

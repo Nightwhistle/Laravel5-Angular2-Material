@@ -19,19 +19,23 @@ export class TasksComponent {
 
     constructor(private tasksService: TasksService) {
         this.tasksList = tasksService.getTasks();
-        console.log(this.tasksList);
     }
 
     deleteTask(t: Task): void {
         this.tasksService.deleteTask(t);
-        this.tasksList.splice(this.tasksList.indexOf(t),1);
+        this.tasksList.splice(this.tasksList.indexOf(t), 1);
     }
 
     updateTask(task: Task, event: Event) {
         this.tasksService.updateTask(task);
     }
 
-    createTask(task: string): void {
-        this.tasksList.unshift(this.tasksService.createTask(task));
+    createTask(createTaskString: string): void {
+        var task: Task = new Task();
+        task.task = createTaskString;
+        var response: Task;
+        response = this.tasksService.createTask(task);
+        console.log(JSON.stringify(response));
+        this.tasksList.unshift(response);
     }
 }

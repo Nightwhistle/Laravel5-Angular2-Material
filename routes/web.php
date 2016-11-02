@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Route::resource('api/tasks', 'TaskController');
 
-Route::post('/api/tasks/create/new', 'TaskController@createNew');
+Route::post('api/tasks/createnew', 'TaskController@createNew');
