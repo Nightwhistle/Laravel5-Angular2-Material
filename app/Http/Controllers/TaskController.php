@@ -28,7 +28,7 @@ class TaskController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return response()->json($validate->messages(), 422git );
+            return response()->json($validate->messages(), 422);
         }
 
         $task = Task::find($req['id']);
