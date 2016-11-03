@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Validator;
+
 class TaskController extends Controller
 {
     public function index()
@@ -22,7 +22,7 @@ class TaskController extends Controller
         $req = $request->all();
         $validate = Validator::make($req, [
             'id' => 'required|numeric',
-            'task' => 'required|min:3',
+            'task' => 'required|min:3|numeric',
             'done' => 'required|digits_between:0,1',
             'priority' => 'required|digits_between:1,10',
         ]);
@@ -60,7 +60,6 @@ class TaskController extends Controller
         $task->done = false;
         $task->save();
         return $task;
-
     }
 
     public function show($id, $text)

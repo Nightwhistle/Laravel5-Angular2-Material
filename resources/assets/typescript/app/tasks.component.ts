@@ -14,8 +14,8 @@ import {Task} from "./task";
 export class TasksComponent {
     public newChecklist: string = '';
     public checklists: string[] = [];
-
     public tasksList: Task[];
+    public taskErrors: String[] = [];
 
     constructor(private tasksService: TasksService) {
         this.tasksList = tasksService.getTasks();
@@ -26,16 +26,41 @@ export class TasksComponent {
         this.tasksList.splice(this.tasksList.indexOf(t), 1);
     }
 
-    updateTask(task: Task, event: Event) {
-        this.tasksService.updateTask(task);
+    updateTask(task: Task): void {
+        var response = this.tasksService.updateTask(task);
+                response.subscribe(data => {
+                task.id = data.id;
+                task.task = data.task;
+                task.priority = data.priority;
+                task.done = data.done;
+                task.created_at = data.created_at;
+                task.updated_at = data.updated_at;
+                task.errors = ["custom error"];
+        },
+            error => {
+                var errorJson = JSON.parse(error._body);
+                task.errors = errorJson.task;
+            });
     }
 
     createTask(createTaskString: string): void {
         var task: Task = new Task();
         task.task = createTaskString;
-        var response: Task;
+        var response: any;
         response = this.tasksService.createTask(task);
-        console.log(JSON.stringify(response));
-        this.tasksList.unshift(response);
+        response.subscribe(data => {
+                response.id = data.id;
+                response.task = data.task;
+                response.priority = data.priority;
+                response.done = data.done;
+                response.created_at = data.created_at;
+                response.updated_at = data.updated_at;
+                this.tasksList.unshift(response);
+                this.taskErrors = [];
+                },
+                   error => {
+                       var errorJson = JSON.parse(error._body);
+                       this.taskErrors = errorJson.task;
+                });
     }
 }

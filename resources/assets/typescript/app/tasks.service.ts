@@ -38,43 +38,16 @@ export class TasksService {
             });
     }
 
-    updateTask(task: Task): Task {
-        var response: Task = new Task();
-        this.http.put(this.updateTasksUrl + task.id, task, this.headers)
-            .map(a => a.json())
-            .subscribe(data => {
-                response.id = data.id;
-                response.task = data.task;
-                response.priority = data.priority;
-                response.done = data.done;
-                response.created_at = data.created_at;
-                response.updated_at = data.updated_at;
-            });
-        console.log(JSON.stringify(response))
-        return response;
+    updateTask(task: Task): any {
+        let observable = this.http.put(this.updateTasksUrl + task.id, task, this.headers)
+            .map(a => a.json());
+        return observable;
     }
 
-    createTask(task: Task): Task {
-        var response: Task = new Task;
-        this.http.post(this.createTaskUrl, task, this.headers)
-            .map(a => a.json())
-            .subscribe(data => {
-                    response.id = data.id;
-                    response.task = data.task;
-                    response.priority = data.priority;
-                    response.done = data.done;
-                    response.created_at = data.created_at;
-                    response.updated_at = data.updated_at;
-                    },
-                       error => {
-                           console.log(JSON.stringify(error._body));
-                    response.errors = error._body;
-                    response.hasError = 1;
-                    });
-        console.log("------------");
-        console.log("Check errors in service " + response.hasError);
-        console.log(JSON.stringify(response));
-        console.log("------------");
-        return response;
+    createTask(task: Task): any {
+        let observable = this.http.post(this.createTaskUrl, task, this.headers)
+            .map(a => a.json());
+        return observable;
     }
+
 }

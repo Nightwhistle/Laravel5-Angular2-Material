@@ -1,8 +1,13 @@
 
     <div class="panel">
         <h2>Add new task</h2>
+        <div *ngIf="taskErrors.length != 0">
+            <div *ngFor="let e of taskErrors">
+                <p class="alert alert-danger">{{e}}</p>
+            </div>
+        </div>
         <input type="text" #newTaskText>
-        <button (click)="createTask(newTaskText.value)">Add task</button>
+        <button (click)="createTask(newTaskText.value); newTaskText.value = ''">Add task</button>
     </div>
 
     <ul class="list-unstyled">
@@ -33,7 +38,11 @@
                     <input name="task" [(ngModel)]="t.task">
                     <button (click)="updateTask(t); t.editing = false">Update</button>
                 </div>
+                <div *ngFor="let e of t.errors">
+                    <p class="alert alert-danger">{{e}}</p>
+                </div>
             </div>
+
             <div class="panel-footer">
                 <p>{{ t.created_at | date}}</p>
             </div>

@@ -31,41 +31,14 @@ var TasksService = (function () {
         });
     };
     TasksService.prototype.updateTask = function (task) {
-        var response = new task_1.Task();
-        this.http.put(this.updateTasksUrl + task.id, task, this.headers)
-            .map(function (a) { return a.json(); })
-            .subscribe(function (data) {
-            response.id = data.id;
-            response.task = data.task;
-            response.priority = data.priority;
-            response.done = data.done;
-            response.created_at = data.created_at;
-            response.updated_at = data.updated_at;
-        });
-        console.log(JSON.stringify(response));
-        return response;
+        var observable = this.http.put(this.updateTasksUrl + task.id, task, this.headers)
+            .map(function (a) { return a.json(); });
+        return observable;
     };
     TasksService.prototype.createTask = function (task) {
-        var response = new task_1.Task;
-        this.http.post(this.createTaskUrl, task, this.headers)
-            .map(function (a) { return a.json(); })
-            .subscribe(function (data) {
-            response.id = data.id;
-            response.task = data.task;
-            response.priority = data.priority;
-            response.done = data.done;
-            response.created_at = data.created_at;
-            response.updated_at = data.updated_at;
-        }, function (error) {
-            console.log(JSON.stringify(error._body));
-            response.errors = error._body;
-            response.hasError = 1;
-        });
-        console.log("------------");
-        console.log("Check errors in service " + response.hasError);
-        console.log(JSON.stringify(response));
-        console.log("------------");
-        return response;
+        var observable = this.http.post(this.createTaskUrl, task, this.headers)
+            .map(function (a) { return a.json(); });
+        return observable;
     };
     TasksService = __decorate([
         core_1.Injectable(), 
