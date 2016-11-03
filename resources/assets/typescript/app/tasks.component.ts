@@ -35,7 +35,6 @@ export class TasksComponent {
                 task.done = data.done;
                 task.created_at = data.created_at;
                 task.updated_at = data.updated_at;
-                task.errors = ["custom error"];
         },
             error => {
                 var errorJson = JSON.parse(error._body);

@@ -23,7 +23,6 @@ var TasksComponent = (function () {
             task.done = data.done;
             task.created_at = data.created_at;
             task.updated_at = data.updated_at;
-            task.errors = ["custom error"];
         }, function (error) {
             var errorJson = JSON.parse(error._body);
             task.errors = errorJson.task;
