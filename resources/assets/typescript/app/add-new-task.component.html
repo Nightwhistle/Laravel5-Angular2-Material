@@ -1,0 +1,10 @@
+<div class="panel">
+    <h2>Add new task</h2>
+    <div *ngIf="taskErrors.length != 0">
+        <div *ngFor="let e of taskErrors">
+            <p class="alert alert-danger">{{e}}</p>
+        </div>
+    </div>
+    <input type="text" #newTaskText>
+    <button (click)="createTask(newTaskText.value); newTaskText.value = ''">Add task</button>
+</div>

@@ -9,7 +9,8 @@ class Task extends Model
 {
     protected $dates = ['published_at'];
 
-    public function getCreatedAtAttribute($date) {
+    public function getCreatedAtAttribute($date)
+    {
         return Carbon::parse($date)->diffForHumans();
     }
 }

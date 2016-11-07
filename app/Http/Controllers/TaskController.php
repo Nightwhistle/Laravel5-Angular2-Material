@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Task;
 use Illuminate\Http\Request;
 use Validator;
@@ -21,9 +22,9 @@ class TaskController extends Controller
     {
         $req = $request->all();
         $validate = Validator::make($req, [
-            'id' => 'required|numeric',
-            'task' => 'required|min:3|numeric',
-            'done' => 'required|digits_between:0,1',
+            'id' => 'required|integer',
+            'task' => 'required|min:3',
+            'done' => 'required|boolean',
             'priority' => 'required|digits_between:1,10',
         ]);
 
@@ -43,7 +44,9 @@ class TaskController extends Controller
     public function store(Request $request)
     {
     }
-    public function createNew(Request $request) {
+
+    public function createNew(Request $request)
+    {
         $req = $request->all();
 
         $validate = Validator::make($req, [
